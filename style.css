@@ -367,26 +367,16 @@ button { font: inherit; }
 
 .project-grid {
   display: grid;
-  grid-template-columns: 1.25fr .75fr;
+  grid-template-columns: 1fr;
   gap: 28px;
   align-items: start;
 }
-
-.project-small { margin-top: 100px; }
 
 .project-image {
   height: 390px;
   position: relative;
   overflow: hidden;
   transition: .4s;
-}
-
-.project-small .project-image { height: 290px; }
-
-.irenic {
-  background:
-    linear-gradient(135deg,rgba(0,0,0,.08),rgba(0,0,0,.35)),
-    url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200') center/cover;
 }
 
 .vaidesh {
@@ -407,20 +397,25 @@ button { font: inherit; }
 
 .project-overlay {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: var(--lime);
-  color: var(--black);
-  padding: 14px 18px;
-  font: 10px var(--mono);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  background: rgba(16,16,16,.86);
+  color: var(--lime);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1.5px;
   opacity: 0;
-  transform: translateY(10px);
-  transition: .3s;
+  transform: none;
+  transition: opacity .35s ease;
+  text-align: center;
 }
 
 .project:hover .project-overlay {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .project-info {
@@ -430,7 +425,14 @@ button { font: inherit; }
   gap: 12px;
 }
 
-.project-info h3 { font-size: 14px; }
+.project-info h3 {
+  font-size: 14px;
+  transition: color .3s ease;
+}
+
+.project:hover .project-info h3 {
+  color: var(--lime);
+}
 
 .project-info p, .project-info > span {
   font: 10px var(--mono);
@@ -561,7 +563,11 @@ footer .mono {
 }
 
 @media (max-width: 768px) {
-  .navbar { height: 72px; padding: 0 6%; }
+
+  .navbar {
+    height: 72px;
+    padding: 0 6%;
+  }
 
   .menu-toggle {
     display: flex;
@@ -596,9 +602,15 @@ footer .mono {
 
   .nav-links.open { display: flex; }
 
-  .hero { min-height: 570px; padding: 25px 6% 0; }
+  .hero {
+    min-height: 570px;
+    padding: 25px 6% 0;
+  }
 
-  .hero-top { font-size: 8px; gap: 12px; }
+  .hero-top {
+    font-size: 8px;
+    gap: 12px;
+  }
 
   .hero-heading { padding: 80px 0; }
 
@@ -606,11 +618,17 @@ footer .mono {
     font-size: clamp(58px, 15vw, 110px);
   }
 
-  .hero-bottom p { max-width: 250px; font-size: 12px; }
+  .hero-bottom p {
+    max-width: 250px;
+    font-size: 12px;
+  }
 
   .section-pad { padding: 75px 6%; }
 
-  .section-label { font-size: 8px; gap: 10px; }
+  .section-label {
+    font-size: 8px;
+    gap: 10px;
+  }
 
   .intro-content {
     grid-template-columns: 1fr;
@@ -636,23 +654,37 @@ footer .mono {
     padding: 45px 0 35px;
   }
 
-  .project-grid { grid-template-columns: 1fr; gap: 35px; }
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
 
-  .project-small { margin-top: 0; }
+  .project-image { height: 290px; }
 
-  .project-image, .project-small .project-image { height: 290px; }
+  .project-overlay {
+    opacity: 1;
+    transform: none;
+  }
 
-  .project-overlay { opacity: 1; transform: none; }
-
-  .work-note { margin-top: 55px; font-size: 8px; }
+  .work-note {
+    margin-top: 55px;
+    font-size: 8px;
+  }
 
   .statement { padding: 75px 6%; }
 
-  .statement-star { font-size: 65px; right: 7%; top: 13%; }
+  .statement-star {
+    font-size: 65px;
+    right: 7%;
+    top: 13%;
+  }
 
   .contact-small { margin-top: 60px; }
 
-  .contact-button { gap: 20px; font-size: 9px; }
+  .contact-button {
+    gap: 20px;
+    font-size: 9px;
+  }
 
   footer {
     flex-wrap: wrap;
@@ -664,71 +696,6 @@ footer .mono {
   .cursor { display: none; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-
-/* =================================
-   VELTRIX INTERACTIVE PORTFOLIO
-================================= */
-
-.project {
-  display: block;
-  cursor: pointer;
-}
-
-.project-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  background: rgba(16,16,16,.86);
-  color: #c5f36b;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  opacity: 0;
-  transform: none;
-  transition: opacity .35s ease;
-  text-align: center;
-}
-
-.project:hover .project-overlay {
-  opacity: 1;
-}
-
-.project-status {
-  color: #c5f36b;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.project-info h3 {
-  transition: color .3s ease;
-}
-
-.project:hover .project-info h3 {
-  color: #c5f36b;
-}
-
-/* Irenic is not clickable */
-.project-large {
-  cursor: default;
-}
-
-/* Mobile: show project details without hover */
 @media (hover: none) {
   .project-overlay {
     opacity: 1;
@@ -736,8 +703,12 @@ footer .mono {
     padding: 20px;
     background: linear-gradient(transparent, rgba(16,16,16,.9));
   }
+}
 
-  .project-large .project-overlay {
-    background: linear-gradient(transparent, rgba(16,16,16,.9));
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
   }
 }
