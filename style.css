@@ -671,3 +671,73 @@ footer .mono {
     transition-duration: .01ms !important;
   }
 }
+
+/* =================================
+   VELTRIX INTERACTIVE PORTFOLIO
+================================= */
+
+.project {
+  display: block;
+  cursor: pointer;
+}
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  background: rgba(16,16,16,.86);
+  color: #c5f36b;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  opacity: 0;
+  transform: none;
+  transition: opacity .35s ease;
+  text-align: center;
+}
+
+.project:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-status {
+  color: #c5f36b;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.project-info h3 {
+  transition: color .3s ease;
+}
+
+.project:hover .project-info h3 {
+  color: #c5f36b;
+}
+
+/* Irenic is not clickable */
+.project-large {
+  cursor: default;
+}
+
+/* Mobile: show project details without hover */
+@media (hover: none) {
+  .project-overlay {
+    opacity: 1;
+    inset: auto 0 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(16,16,16,.9));
+  }
+
+  .project-large .project-overlay {
+    background: linear-gradient(transparent, rgba(16,16,16,.9));
+  }
+}
