@@ -1,56 +1,78 @@
 
-// VELTRIX STUDIO — Website interactions
+// VELTRIX STUDIO — INTERACTIONS
 
-document.addEventListener("DOMContentLoaded", () => {
+// Loading screen
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", function(e) {
-      const target = document.querySelector(this.getAttribute("href"));
+  setTimeout(() => {
+    loader.classList.add("hide");
+  }, 700);
+});
 
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: "smooth"
-        });
-      }
+// Mobile navigation
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+  });
+});
+
+// Custom cursor
+const cursor = document.getElementById("cursor");
+
+if (window.matchMedia("(pointer: fine)").matches) {
+  document.addEventListener("mousemove", (event) => {
+    cursor.style.left = event.clientX + "px";
+    cursor.style.top = event.clientY + "px";
+  });
+
+  document.querySelectorAll("a, button").forEach(element => {
+    element.addEventListener("mouseenter", () => {
+      cursor.style.width = "25px";
+      cursor.style.height = "25px";
+    });
+
+    element.addEventListener("mouseleave", () => {
+      cursor.style.width = "12px";
+      cursor.style.height = "12px";
     });
   });
+}
 
-  // Automatic copyright year
-  const footerText = document.querySelector("footer p");
+// Scroll reveal
+const revealElements = document.querySelectorAll(
+  ".intro-content, .services-heading, .service-item, .work-heading, .project, .statement h2, .contact h2, .contact-button"
+);
 
-  if (footerText) {
-    footerText.textContent =
-      `© ${new Date().getFullYear()} VELTRIX STUDIO. ALL RIGHTS RESERVED.`;
-  }
+revealElements.forEach(element => {
+  element.classList.add("reveal");
+});
 
-  // Reveal sections when scrolling
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.15
-  });
-
-  document.querySelectorAll(".section, .card, .project").forEach(element => {
-    observer.observe(element);
-  });
-
-  // Header shadow while scrolling
-  const header = document.querySelector("header");
-
-  window.addEventListener("scroll", () => {
-    if (header) {
-      header.style.boxShadow =
-        window.scrollY > 30
-          ? "0 8px 30px rgba(0,0,0,0.25)"
-          : "none";
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
     }
   });
-
+}, {
+  threshold: 0.12
 });
+
+revealElements.forEach(element => {
+  observer.observe(element);
+});
+
+// Footer year
+const footerYear = document.querySelector("footer .mono:last-child");
+
+if (footerYear) {
+  footerYear.textContent = `© ${new Date().getFullYear()} VELTRIX STUDIO`;
+}
